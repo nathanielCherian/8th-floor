@@ -13,8 +13,9 @@
         {% for event in events %}
             <div class="card">
                 <h2>{{ event.assignment }} | {{ event.code }}</h2>
-                <span>Professor: {{ event.professor }} </span>
-                <span>Location: </span>
+                <p>Professor: {{ event.professor }} </p>
+                <p>When: {{ event.date.strftime('%l:%M on %A, %m-%d-%y') }} </p>
+                <p>Where: {{ event.location }}</p>
 
                 <hr>
                 <p>{{ event.description }} </p>
@@ -36,6 +37,9 @@
                 <p><input type="text" name="assignment" placeholder="Assignment Name"></p>
                 <p><input type="text" name="professor" placeholder="Professor"></p>
                 <p><input type="text" name="code" placeholder="Course Code"></p>
+                <p><input type="text" name="location" placeholder="Location"></p>
+                <p><input type="datetime-local" name="date" placeholder="Date&time"></p>
+
                 <textarea maxlength="300" name="description" placeholder="description"></textarea>
 
                 <p>Your info:</p>

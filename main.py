@@ -1,6 +1,8 @@
 from pydoc import describe
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -11,20 +13,21 @@ db = SQLAlchemy(app)
 
 class Events(db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
-    assignment = db.Column(db.String(200)
+    assignment = db.Column(db.String(200))
     professor = db.Column(db.String(200))
     code = db.Column(db.String(6))
-    location = db.Column(db.String(2000))
-    date = db.Column(db.DateTime(400))
+    location = db.Column(db.String(100))
+    date = db.Column(db.DateTime())
     description = db.Column(db.String(300))
 
-    def __init__( self , assignment , professor , code , description ):
+    def __init__( self , assignment , professor , code , location, date, description ):
         self.assignment = assignment
         self.professor = professor
         self.code = code 
-        self.description = description
         self.location = location
-        self.dateTime = dateTime
+        self.date = date
+        self.description = description
+
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -33,17 +36,16 @@ def index():
     if request.method == 'POST':
         form_data = request.form
         assignment = form_data['assignment']
-        code = form_data['code']
         professor = form_data['professor']
-        dateTime = form_data['Date and Time of Meeting']
-        description = form_data['description']
+        code = form_data['code']
         location = form_data['location']
-        event = Events(assignment, professor, code, dateTime, description , location)
+        date = datetime.strptime(form_data['date'], '%Y-%m-%dT%H:%M')
+        print(date)
         description = form_data['description']
-        event = Events(assignment, professor, code, description)
+        event = Events(assignment, professor, code, location, date, description)
         db.session.add(event)
         db.session.commit()
-        return 
+        return redirect("/")
 
     return render_template('index.html', events=events)
 

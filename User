@@ -5,19 +5,20 @@ from xml.dom.xmlbuilder import _DOMInputSourceStringDataType
 from symbol import yield_arg
 
 db = SQLAlchemy(app)
-class User(db.Model):
-    id = db.Column(db.String, db.Integer, primary_key = True)
-        userName = db.Column(db.String(200))
-        gradYear = db.Column(db.int() ) 
-        assignment = db.Column(db.String(200))
-        dueDate = db.Column(db.String(200))
-        professor = db.Column(db.String(200))
-        course =db.Column(db.String(200))
 
-    def _init_( self , userName , gradYear , assignment , dueDate , professor , course  ):
+class Event(db.Model):
+    id = db.Column(db.String, db.Integer, primary_key = True)
+    userName = db.Column(db.String(200))
+    assignment = db.Column(db.String(200))
+    professor = db.Column(db.String(200))
+    course =db.Column(db.String(200))
+    email = db.Column(db.String(200))
+    location = db.Column(db.String(200))
+
+    def _init_( self , userName , assignment , professor , course, email , location ):
         self.name = userName
-        self.year = year
         self.assignment = assignment
-        self.dueDate = dueDate
         self.professor = professor
         self.course = course 
+        self.email = email
+        self.location = location

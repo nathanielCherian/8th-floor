@@ -1,5 +1,8 @@
-from flask import Flask, render_template, request
+from pydoc import describe
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
 
 app = Flask(__name__)
 
@@ -12,12 +15,20 @@ class Events(db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     assignment = db.Column(db.String(200))
     professor = db.Column(db.String(200))
-    course =db.Column(db.String(200))
-    # dueDate = db.Column(db.String(200))
-    def __init__( self , assignment , professor , code  ):
+    code = db.Column(db.String(6))
+    location = db.Column(db.String(100))
+    date = db.Column(db.DateTime())
+    description = db.Column(db.String(300))
+
+    def __init__( self , assignment , professor , code , location, date, description ):
         self.assignment = assignment
         self.professor = professor
         self.code = code 
+        self.location = location
+        self.date = date
+        self.description = description
+
+
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -25,29 +36,20 @@ def index():
     if request.method == 'POST':
         form_data = request.form
         assignment = form_data['assignment']
-        code = form_data['code']
         professor = form_data['professor']
-        event = Events(assignment, professor, code)
+        code = form_data['code']
+        location = form_data['location']
+        date = datetime.strptime(form_data['date'], '%Y-%m-%dT%H:%M')
+        print(date)
+        description = form_data['description']
+        event = Events(assignment, professor, code, location, date, description)
         db.session.add(event)
         db.session.commit()
+        return redirect("/")
 
     return render_template('index.html', events=events)
 
-@app.route('/login', methods=['POST', 'GET'])
-def login():
-    return render_template('login.html')
 
-@app.route('/create-account', methods=['POST', 'GET'])
-def create_account():
-    return render_template("create_account.html")
-
-@app.route("/api/create-event", methods=['POST'])
-def create_event():
-    return
-
-@app.route("/api/get-event", methods=['GET'])
-def get_events():
-    return {}
 
 
 

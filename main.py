@@ -1,6 +1,12 @@
 from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+app.config ['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.sqlite3'
+app.config['SECRET_KEY'] = "very secret"
+
+db = SQLAlchemy(app)
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -44,4 +50,6 @@ def get_events():
 
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(host="0.0.0.0", port=8000, debug=True)
+

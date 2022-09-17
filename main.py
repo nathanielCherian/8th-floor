@@ -23,6 +23,8 @@ class Events(db.Model):
     email = db.Column(db.String(200))
     name = db.Column(db.String(200))
 
+    rsvp = db.Column(db.Integer())
+
     def __init__( self , assignment , professor , code , location, date, description, email, name ):
         self.assignment = assignment
         self.professor = professor
@@ -34,6 +36,7 @@ class Events(db.Model):
         self.email = email
         self.name = name
 
+        self.rsvp = 0
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -58,6 +61,13 @@ def index():
     return render_template('index.html', events=events)
 
 
+@app.route('/rsvp/<event_id>', methods=['GET'])
+def rsvp(event_id):
+    event_id = int(event_id)
+    event = Events.query.get(event_id)
+    event.rsvp += 1
+    db.session.commit()
+    return "yo"
 
 
 

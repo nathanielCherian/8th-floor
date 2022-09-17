@@ -20,13 +20,19 @@ class Events(db.Model):
     date = db.Column(db.DateTime())
     description = db.Column(db.String(300))
 
-    def __init__( self , assignment , professor , code , location, date, description ):
+    email = db.Column(db.String(200))
+    name = db.Column(db.String(200))
+
+    def __init__( self , assignment , professor , code , location, date, description, email, name ):
         self.assignment = assignment
         self.professor = professor
         self.code = code 
         self.location = location
         self.date = date
         self.description = description
+
+        self.email = email
+        self.name = name
 
 
 
@@ -40,9 +46,11 @@ def index():
         code = form_data['code']
         location = form_data['location']
         date = datetime.strptime(form_data['date'], '%Y-%m-%dT%H:%M')
-        print(date)
         description = form_data['description']
-        event = Events(assignment, professor, code, location, date, description)
+
+        email = form_data['email']
+        name = form_data['name']
+        event = Events(assignment, professor, code, location, date, description, email, name)
         db.session.add(event)
         db.session.commit()
         return redirect("/")

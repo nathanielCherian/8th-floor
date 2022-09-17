@@ -1,3 +1,4 @@
+from pydoc import describe
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -12,12 +13,14 @@ class Events(db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     assignment = db.Column(db.String(200))
     professor = db.Column(db.String(200))
-    course =db.Column(db.String(200))
+    course =db.Column(db.String(20))
+    description = db.Column(db.String(300))
     # dueDate = db.Column(db.String(200))
-    def __init__( self , assignment , professor , code  ):
+    def __init__( self , assignment , professor , code , description ):
         self.assignment = assignment
         self.professor = professor
         self.code = code 
+        self.description = description
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -27,7 +30,8 @@ def index():
         assignment = form_data['assignment']
         code = form_data['code']
         professor = form_data['professor']
-        event = Events(assignment, professor, code)
+        description = form_data['description']
+        event = Events(assignment, professor, code, description)
         db.session.add(event)
         db.session.commit()
 

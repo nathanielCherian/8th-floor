@@ -15,6 +15,7 @@
                 <h2>{{ event.assignment }}</h2>
                 <span>{{ event.code }} </span>
                 <span>Professor: {{ event.professor }} </span>
+                <p>{{ event.description }} </p>
             </div>
         {% endfor %}
     {% else %}
@@ -37,6 +38,9 @@
                 <p><input type="text" name="code" placeholder="Course Code"></p>
                 <p><input type="email" name="email" placeholder="Your Email"></p>
                 <p><input type="name" name="name" placeholder="Your Name"></p>
+
+                <textarea maxlength="300" name="description" placeholder="description"></textarea>
+
                 <input type="submit" />
             </form>
         </div>

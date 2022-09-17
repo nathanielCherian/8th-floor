@@ -30,8 +30,6 @@ def create_account():
 
 @app.route("/api/create-event", methods=['POST'])
 def create_event():
-    if request.method == 'POST':
-
     return
 
 @app.route("/api/get-event", methods=['GET'])

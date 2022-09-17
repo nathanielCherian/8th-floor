@@ -11,17 +11,21 @@ db = SQLAlchemy(app)
 
 class Events(db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
-    assignment = db.Column(db.String(200))
+    assignment = db.Column(db.String(200)
     professor = db.Column(db.String(200))
-    course = db.Column(db.String(20))
     code = db.Column(db.String(6))
+    location = db.Column(db.String(2000))
+    date = db.Column(db.DateTime(400))
     description = db.Column(db.String(300))
-    # dueDate = db.Column(db.String(200))
+
     def __init__( self , assignment , professor , code , description ):
         self.assignment = assignment
         self.professor = professor
         self.code = code 
         self.description = description
+        self.location = location
+        self.dateTime = dateTime
+
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -31,6 +35,10 @@ def index():
         assignment = form_data['assignment']
         code = form_data['code']
         professor = form_data['professor']
+        dateTime = form_data['Date and Time of Meeting']
+        description = form_data['description']
+        location = form_data['location']
+        event = Events(assignment, professor, code, dateTime, description , location)
         description = form_data['description']
         event = Events(assignment, professor, code, description)
         db.session.add(event)

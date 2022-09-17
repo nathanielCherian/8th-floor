@@ -13,11 +13,18 @@ class Events(db.Model):
     assignment = db.Column(db.String(200))
     professor = db.Column(db.String(200))
     course =db.Column(db.String(200))
-    # dueDate = db.Column(db.String(200))
-    def __init__( self , assignment , professor , code  ):
+    due = db.Column(db.String(200))
+    description = db.Column(db.String(2000))
+    location = db.Column(db.String(2000))
+    dateTime = db.Column(db.DateTime(400))
+
+    def __init__( self , assignment , professor , code , dateTime , description ,location ):
         self.assignment = assignment
         self.professor = professor
         self.code = code 
+        self.description = description
+        self.location = location
+        self.dateTime = dateTime
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -27,7 +34,10 @@ def index():
         assignment = form_data['assignment']
         code = form_data['code']
         professor = form_data['professor']
-        event = Events(assignment, professor, code)
+        dateTime = form_data['Date and Time of Meeting']
+        description = form_data['description']
+        location = form_data['location']
+        event = Events(assignment, professor, code, dateTime, description , location)
         db.session.add(event)
         db.session.commit()
 

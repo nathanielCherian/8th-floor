@@ -1,5 +1,5 @@
 from pydoc import describe
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -13,7 +13,8 @@ class Events(db.Model):
     id = db.Column('id', db.Integer, primary_key = True)
     assignment = db.Column(db.String(200))
     professor = db.Column(db.String(200))
-    course =db.Column(db.String(20))
+    course = db.Column(db.String(20))
+    code = db.Column(db.String(6))
     description = db.Column(db.String(300))
     # dueDate = db.Column(db.String(200))
     def __init__( self , assignment , professor , code , description ):
@@ -34,24 +35,11 @@ def index():
         event = Events(assignment, professor, code, description)
         db.session.add(event)
         db.session.commit()
+        return 
 
     return render_template('index.html', events=events)
 
-@app.route('/login', methods=['POST', 'GET'])
-def login():
-    return render_template('login.html')
 
-@app.route('/create-account', methods=['POST', 'GET'])
-def create_account():
-    return render_template("create_account.html")
-
-@app.route("/api/create-event", methods=['POST'])
-def create_event():
-    return
-
-@app.route("/api/get-event", methods=['GET'])
-def get_events():
-    return {}
 
 
 

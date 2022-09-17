@@ -12,9 +12,11 @@
     {% if events|length > 1%}
         {% for event in events %}
             <div class="card">
-                <h2>{{ event.assignment }}</h2>
-                <span>{{ event.code }} </span>
+                <h2>{{ event.assignment }} | {{ event.code }}</h2>
                 <span>Professor: {{ event.professor }} </span>
+                <span>Location: </span>
+
+                <hr>
                 <p>{{ event.description }} </p>
             </div>
         {% endfor %}
@@ -29,17 +31,19 @@
 
     <div class="rightcolumn">
         <div class="card special">
-            <p>Add your own study event...</p>
             <form action="/", method="POST">
-                <h3>Make your own event:</h3>
+                <h3>Organize your own event:</h3>
                 <p><input type="text" name="assignment" placeholder="Assignment Name"></p>
                 <p><input type="text" name="professor" placeholder="Professor"></p>
-
                 <p><input type="text" name="code" placeholder="Course Code"></p>
+                <textarea maxlength="300" name="description" placeholder="description"></textarea>
+
+                <p>Your info:</p>
                 <p><input type="email" name="email" placeholder="Your Email"></p>
                 <p><input type="name" name="name" placeholder="Your Name"></p>
+                <input type="checkbox" name="share_info" value="True">
+                <label for="share_info"><small>Display your info</small></label><br>
 
-                <textarea maxlength="300" name="description" placeholder="description"></textarea>
 
                 <input type="submit" />
             </form>

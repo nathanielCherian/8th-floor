@@ -5,14 +5,19 @@
     <title>Name Here</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <h2>Welcome to FlaskApp!</h2>
+    <h1>Events!</h1>
 
     {% for event in events %}
         <p>Name: {{ event.name }}</p>
         <p>Course: {{  event.course }} </p>
         <p>Professor: {{ event.professor }} </p>
     {% endfor %}
+
+    <form action="/", method="POST">
+        <h3>Make your own event:</h3>
+        <p>Class Name: <input type="text" name="class_name"></p>
+        <input type="submit" />
+    </form>
 
 </body>
 </html>

@@ -13,7 +13,7 @@
     {% if events|length > 1%}
         {% for event in events %}
             <div class="card">
-                <h2>{{ event.assignment }} | {{ event.code }}</h2>
+                <h2>{{ event.assignment }} <span style="color: #9D968D; font-size: 20px;">{{ event.code }}</span></h2>
                 <p>Professor: {{ event.professor }} </p>
                 <p>When: {{ event.date.strftime('%H:%M %m-%d-%y') }} </p>
                 <p>Where: {{ event.location }}</p>

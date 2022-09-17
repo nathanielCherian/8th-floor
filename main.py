@@ -16,6 +16,11 @@ def index():
     if request.method == 'POST':
         form_data = request.form
         name = form_data['class_name']
+        events.append({
+            "name":name,
+            "course":'test',
+            "professor":"test"
+        })
         print(name)
 
     return render_template('index.html', events=events)

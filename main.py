@@ -1,10 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def hello():
+@app.route('/', methods=["GET", "POST"])
+def index():
     events = [
         {
             "name":"Math test",
@@ -12,6 +12,17 @@ def hello():
             "professor":"Glubokov",
         },
     ]
+
+    if request.method == 'POST':
+        form_data = request.form
+        name = form_data['class_name']
+        events.append({
+            "name":name,
+            "course":'test',
+            "professor":"test"
+        })
+        print(name)
+
     return render_template('index.html', events=events)
 
 @app.route('/login', methods=['POST', 'GET'])

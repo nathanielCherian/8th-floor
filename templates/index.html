@@ -19,6 +19,9 @@
 
                 <hr>
                 <p>{{ event.description }} </p>
+                <hr>
+                <small>Posted by {{ event.name }} ({{event.email}})</small>
+
             </div>
         {% endfor %}
     {% else %}
@@ -44,10 +47,7 @@
 
                 <p>Your info:</p>
                 <p><input type="email" name="email" placeholder="Your Email"></p>
-                <p><input type="name" name="name" placeholder="Your Name"></p>
-                <input type="checkbox" name="share_info" value="True">
-                <label for="share_info"><small>Display your info</small></label><br>
-
+                <p><input type="text" name="name" placeholder="Your Name"></p>
 
                 <input type="submit" />
             </form>

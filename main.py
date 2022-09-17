@@ -8,6 +8,15 @@ app.config['SECRET_KEY'] = "very secret"
 
 db = SQLAlchemy(app)
 
+# class User(db.Model):
+#     id = db.Column(db.String, db.Integer, primary_key = True)
+#     userName = db.Column(db.String(200))
+#     gradYear = db.Column(db.int() ) 
+#     assignment = db.Column(db.String(200))
+#     dueDate = db.Column(db.String(200))
+#     professor = db.Column(db.String(200))
+#     course =db.Column(db.String(200))
+
 
 @app.route('/', methods=["GET", "POST"])
 def index():

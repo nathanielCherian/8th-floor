@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+<html>
+<body>
+
 <div class="header">
     <h2>Purdue Study Chum</h2>
-  </div>
+</div>
   
  <div class="row">
     <div class="leftcolumn">
@@ -23,51 +26,15 @@
             <form action="/", method="POST">
                 <h3>Make your own event:</h3>
                 <p>Class Name: <input type="text" name="class_name"></p>
+                <p>Your email: <input type="email" name="email"></p>
+                <p>Your name: <input type="name" name="name"></p>
                 <input type="submit" />
             </form>
         </div>
     </div>
 
-    </div>
-  
+</div>
 
-<!--
-    <div class="rightcolumn">
-      <div class="card">
-        <h2>About Me</h2>
-        <div class="fakeimg" style="height:100px;">Image</div>
-        <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-      </div>
-      <div class="card">
-        <h3>Popular Post</h3>
-        <div class="fakeimg">Image</div><br>
-        <div class="fakeimg">Image</div><br>
-        <div class="fakeimg">Image</div>
-      </div>
-      <div class="card">
-        <h3>Follow Me</h3>
-        <p>Some text..</p>
-      </div>
-    </div>
-  </div> -->
-
-
-<!-- <body>
-    <h1>Events!</h1>
-
-    {% for event in events %}
-        <p>Name: {{ event.name }}</p>
-        <p>Course: {{  event.course }} </p>
-        <p>Professor: {{ event.professor }} </p>
-    {% endfor %}
-
-    <form action="/", method="POST">
-        <h3>Make your own event:</h3>
-        <p>Class Name: <input type="text" name="class_name"></p>
-        <input type="submit" />
-    </form>
-
-</body> -->
 
 
 <style>
@@ -77,13 +44,13 @@
 
 body {
   font-family: Arial;
-  padding: 20px;
+  padding: 0px;
   background: #f1f1f1;
 }
 
 /* Header/Blog Title */
 .header {
-  padding: 30px;
+  padding: 10px;
   font-size: 40px;
   text-align: center;
   background: white;
@@ -144,5 +111,5 @@ body {
   }
 }
 </style>
-
+</body>
 </html>
